@@ -1,0 +1,30 @@
+name: Go build and test
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - v*
+  pull_request:
+    branches:
+      - main
+      - release/v*
+
+env:
+  GO_VERSION: 1.18.1
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - run: go mod download
+      - run: go vet .
+      - run: go build ./...
+      - run: go test ./...
