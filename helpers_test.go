@@ -173,7 +173,7 @@ func TestQueryWithUnmarshal(t *testing.T) {
 		query        *dynamodb.QueryInput
 		want         interface{}
 	}{
-		"simple table with query to unmarshall": {
+		"simple table with query to unmarshal": {
 			initialSetup: []dynamotest.InitialTableSetup{
 				{
 					Table: &dynamodb.CreateTableInput{
