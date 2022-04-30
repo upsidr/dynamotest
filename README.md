@@ -7,9 +7,9 @@ Use the power of [DynamoDB Local][1] with [ory/dockertest][2], create your Dynam
 
 ## 🌄 What is `dynamotest`?
 
-`dynamotest` is a package to help set up a DynamoDB Local Docker instance on your machine as a part of Go test code. It uses [`ory/dockertest`][2] to start the DynamoDB Local instance in your Go test code, and is configured so that each call to `dynamotest.NewDynamoDB(t)` will create a dedicated instance to allow parallel testing on multilpe Docker instances. The function returns a new DynamoDB client which is already connected to the instance, and thus you can simply start using the client straight away. Also, it provides the clean up function to ensure that the Docker instance gets deleted if clean-up is preferred. If you do not call the clean up function, the instance will keep running, which may be useful for debugging and investigation.
+`dynamotest` is a package to help set up a DynamoDB Local Docker instance on your machine as a part of Go test code. It uses [`ory/dockertest`][2] to start the DynamoDB Local instance in your Go test code, and is configured so that each call to `dynamotest.NewDynamoDB(t)` will create a dedicated instance to allow parallel testing on multiple Docker instances. The function returns a new DynamoDB client which is already connected to the instance, and thus you can simply start using the client straight away. Also, it provides the clean up function to ensure that the Docker instance gets deleted if clean-up is preferred. If you do not call the clean up function, the instance will keep running, which may be useful for debugging and investigation.
 
-`dynamotest` also provides a helper function `dynamotest.PrepTable(t, client, ...dynamotestInitialTableSetup)` to prepare tables and dataset for setting up the tabel before hand.
+`dynamotest` also provides a helper function `dynamotest.PrepTable(t, client, ...dynamotest.InitialTableSetup)` to prepare tables and dataset for setting up the table before hand.
 
 It is also worth noting how this package uses only the v2 version of AWS SDK.
 
