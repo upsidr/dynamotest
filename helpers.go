@@ -92,6 +92,11 @@ func PrepTable(t testing.TB, client *dynamodb.Client, input ...InitialTableSetup
 			t.Fatalf("Could not create table '%s': %v", *i.Table.TableName, err)
 		}
 
+		if len(i.InitialData) == 0 {
+			t.Logf("Table '%s' has been created, and no initial data has been added", *i.Table.TableName)
+			continue
+		}
+
 		puts := []types.WriteRequest{}
 		for _, d := range i.InitialData {
 			puts = append(puts, types.WriteRequest{PutRequest: d})
