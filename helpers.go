@@ -30,7 +30,7 @@ func NewDynamoDB(t testing.TB) (*dynamodb.Client, func()) {
 		Tag:        dynamoDBLocalTag,
 
 		PortBindings: map[docker.Port][]docker.PortBinding{
-			"0/tcp": {{HostIP: "localhost", HostPort: "8000/tcp"}},
+			"8000/tcp": {{HostIP: "127.0.0.1", HostPort: "0"}},
 		},
 	}
 	resource, err := pool.RunWithOptions(runOpt)
