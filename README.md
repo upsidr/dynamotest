@@ -1,3 +1,8 @@
+> [!WARNING]
+> This repository is archived and is no longer maintained.
+>
+> Issues and pull requests are not monitored.
+
 # dynamotest
 
 Use the power of [DynamoDB Local][1] with [ory/dockertest][2], create your DynamoDB test cases with breeze.
