@@ -40,6 +40,15 @@ func NewDynamoDB(t testing.TB) (*dynamodb.Client, func()) {
 
 	t.Logf("Using host:port of '%s'", resource.GetHostPort("8000/tcp"))
 
+	// Safety net: have the Docker daemon force-remove the container after 10
+	// minutes regardless of the test process. The returned clean func removes
+	// it on normal completion, but t.Cleanup never runs when the test binary
+	// dies abnormally (go test timeout, SIGKILL, panic in another goroutine),
+	// which would otherwise leak the container.
+	if err = resource.Expire(600); err != nil {
+		t.Fatalf("Could not set DynamoDB Local expiry: %s", err)
+	}
+
 	if err = pool.Retry(func() error {
 		cfg, err := config.LoadDefaultConfig(context.Background(),
 			config.WithRegion("us-east-1"),
